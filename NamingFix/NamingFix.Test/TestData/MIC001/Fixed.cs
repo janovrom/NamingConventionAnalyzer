@@ -6,6 +6,6 @@ namespace NamingFix.Test.TestData.MIC001
 {
     class TestClass
     {
-        public const int Value = 1;
+        public const int Value = 0;
     }
 }
