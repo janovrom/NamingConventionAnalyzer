@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace NamingFix
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class PrivateConstUnderscoreUpperAnalyzer : DiagnosticAnalyzer
+    public class PrivateConstAnalyzer : DiagnosticAnalyzer
     {
         public const string DiagnosticId = "MIC002";
 

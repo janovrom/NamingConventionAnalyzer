@@ -15,12 +15,12 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace NamingFix
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(PascalCasePublicConstCodeFixProvider)), Shared]
-    public class PascalCasePublicConstCodeFixProvider : CodeFixProvider
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(PrivateConstCodeFixProvider)), Shared]
+    public class PrivateConstCodeFixProvider : CodeFixProvider
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(PascalCasePublicConstAnalyzer.DiagnosticId); }
+            get { return ImmutableArray.Create(PrivateConstAnalyzer.DiagnosticId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()
@@ -37,13 +37,24 @@ namespace NamingFix
             TextSpan diagnosticSpan = diagnostic.Location.SourceSpan;
             SyntaxToken token = root.FindToken(diagnosticSpan.Start);
 
-            context.RegisterCodeFix(CodeAction.Create(CodeFixResources.CodeFixTitle, c => MakeFirstLetterUppercaseAsync(context.Document, token, c),
-                PascalCasePublicConstAnalyzer.DiagnosticId), diagnostic);
+            context.RegisterCodeFix(CodeAction.Create(CodeFixResources.PrivateConstTitle, c => FixPrivateConst(context.Document, token, c),
+                PrivateConstAnalyzer.DiagnosticId), diagnostic);
         }
 
-        private async Task<Solution> MakeFirstLetterUppercaseAsync(Document document, SyntaxToken token, CancellationToken cancellationToken)
+        private async Task<Solution> FixPrivateConst(Document document, SyntaxToken token, CancellationToken cancellationToken)
         {
-            var newName = $"{char.ToUpperInvariant(token.ValueText[0])}{token.ValueText.Substring(1)}";
+            string newName = token.ValueText;
+            if (!token.ValueText.StartsWith("_"))
+            {
+                newName = $"_{char.ToUpperInvariant(token.ValueText[0])}{token.ValueText.Substring(1)}";
+            }
+            else
+            {
+                if (token.ValueText.Length > 2)
+                    newName = $"_{char.ToUpperInvariant(token.ValueText[1])}{token.ValueText.Substring(2)}";
+                else
+                    newName = $"_{char.ToUpperInvariant(token.ValueText[1])}";
+            }
 
             // Get the symbol representing the type to be renamed.
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);

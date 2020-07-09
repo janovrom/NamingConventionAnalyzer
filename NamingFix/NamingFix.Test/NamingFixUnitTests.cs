@@ -6,9 +6,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using NamingFix;
-using Verify = Microsoft.CodeAnalysis.CSharp.Testing.MSTest.CodeFixVerifier<
-    NamingFix.PascalCasePublicConstAnalyzer,
-    NamingFix.PascalCasePublicConstCodeFixProvider>;
+using Verify = Microsoft.CodeAnalysis.CSharp.Testing.MSTest.AnalyzerVerifier<NamingFix.PublicConstAnalyzer>;
+using System.IO;
+using Microsoft.CodeAnalysis.Testing;
 
 namespace NamingFix.Test
 {
@@ -28,38 +28,13 @@ namespace NamingFix.Test
         [TestMethod]
         public async Task TestMethod2()
         {
-            var test = @"
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Diagnostics;
+            var test = File.ReadAllText("./TestData/MIC001/Warning.cs");
+            var fixtest = File.ReadAllText("./TestData/MIC001/Fixed.cs");
 
-    namespace ConsoleApplication1
-    {
-        class TypeName
-        {   
-        }
-    }";
 
-            var fixtest = @"
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Diagnostics;
-
-    namespace ConsoleApplication1
-    {
-        class TYPENAME
-        {   
-        }
-    }";
-
-            var expected = Verify.Diagnostic("NamingFix").WithLocation(11, 15).WithArguments("TypeName");
-            await Verify.VerifyCodeFixAsync(test, expected, fixtest);
+            DiagnosticResult expected = Verify.Diagnostic(PublicConstAnalyzer.DiagnosticId).WithSpan(9, 26, 9, 31).WithArguments("value");
+            await Verify.VerifyAnalyzerAsync(test, expected);
+            //await Verify.VerifyCodeFixAsync(test, expected, fixtest);
         }
     }
 }
