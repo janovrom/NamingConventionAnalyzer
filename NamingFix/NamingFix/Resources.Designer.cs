@@ -88,6 +88,15 @@ namespace NamingFix {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Private or protected fields should start with underscore and lowercase.
+        /// </summary>
+        internal static string PrivateAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("PrivateAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Private or protected constants should start with underscored followed by uppercase.
         /// </summary>
         internal static string PrivateConstAnalyzerDescription {
@@ -111,6 +120,24 @@ namespace NamingFix {
         internal static string PrivateConstTitle {
             get {
                 return ResourceManager.GetString("PrivateConstTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field name &apos;{0}&apos; does not start with _[a-z].
+        /// </summary>
+        internal static string PrivateMessageFormat {
+            get {
+                return ResourceManager.GetString("PrivateMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field name does not start with _[a-z].
+        /// </summary>
+        internal static string PrivateTitle {
+            get {
+                return ResourceManager.GetString("PrivateTitle", resourceCulture);
             }
         }
     }

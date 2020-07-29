@@ -77,5 +77,14 @@ namespace NamingFix {
                 return ResourceManager.GetString("PrivateConstTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Private or protected field should start with underscore followed by lowercase.
+        /// </summary>
+        internal static string PrivateTitle {
+            get {
+                return ResourceManager.GetString("PrivateTitle", resourceCulture);
+            }
+        }
     }
 }

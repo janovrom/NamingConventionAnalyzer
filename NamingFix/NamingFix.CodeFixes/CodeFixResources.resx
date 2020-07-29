@@ -124,4 +124,7 @@
   <data name="PrivateConstTitle" xml:space="preserve">
     <value>Private or protected constant should start with underscore followed by upperscore</value>
   </data>
+  <data name="PrivateTitle" xml:space="preserve">
+    <value>Private or protected field should start with underscore followed by lowercase</value>
+  </data>
 </root>

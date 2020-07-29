@@ -129,6 +129,9 @@
     <value>Constant name starts with lowercase letter</value>
     <comment>The title of the diagnostic.</comment>
   </data>
+  <data name="PrivateAnalyzerDescription" xml:space="preserve">
+    <value>Private or protected fields should start with underscore and lowercase</value>
+  </data>
   <data name="PrivateConstAnalyzerDescription" xml:space="preserve">
     <value>Private or protected constants should start with underscored followed by uppercase</value>
   </data>
@@ -137,5 +140,11 @@
   </data>
   <data name="PrivateConstTitle" xml:space="preserve">
     <value>Constant name does not start with _[A-Z]</value>
+  </data>
+  <data name="PrivateMessageFormat" xml:space="preserve">
+    <value>Field name '{0}' does not start with _[a-z]</value>
+  </data>
+  <data name="PrivateTitle" xml:space="preserve">
+    <value>Field name does not start with _[a-z]</value>
   </data>
 </root>
