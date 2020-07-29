@@ -20,7 +20,7 @@ namespace NamingFix
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(PrivateConstAnalyzer.DiagnosticId); }
+            get { return ImmutableArray.Create(PrivateAnalyzer.DiagnosticId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()

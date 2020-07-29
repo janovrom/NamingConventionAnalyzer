@@ -43,8 +43,8 @@ namespace NamingFix
             if (fieldSymbol.Name.Length < 2)
                 return;
 
-            // Find just those named type symbols with names containing lowercase letters.
-            if (fieldSymbol.Name[0] != '_' || char.IsLower(fieldSymbol.Name[1]))
+            // Find just those named type symbols with names containing uppercase letters.
+            if (fieldSymbol.Name[0] != '_' || char.IsUpper(fieldSymbol.Name[1]))
             {
                 // For all such symbols, produce a diagnostic.
                 var diagnostic = Diagnostic.Create(Rule, fieldSymbol.Locations[0], fieldSymbol.Name);
